@@ -8,18 +8,20 @@ const session = require('express-session');
 
 const indexRouter = require('./routes/index');
 const usersRouter = require('./routes/users');
+const authRouter = require('./routes/auth');
 
 const app = express();
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 passport.use(new GoogleStrategy({
-	clientId: '',
-	clientSecret: '',
-	callbackURL: '',
+	clientID: '30748610964-j7b9tn6eqef652npmohsduuqj5opbilp.apps.googleusercontent.com',
+	clientSecret: 'QPx4HqZPnWW_lm1Eq_fqktnO',
+	callbackURL: 'http://localhost:3000/auth/google/callback'
+	},
 	function(req, accessToken, refreshToken, profile, done){
 		done(null, profile);
 	}
-}));
+));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -46,6 +48,7 @@ passport.deserializeUser(function(user, done) {
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/auth',authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
