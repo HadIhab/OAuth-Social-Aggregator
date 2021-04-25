@@ -14,12 +14,13 @@ const app = express();
 const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 passport.use(new GoogleStrategy({
-	clientID: '30748610964-j7b9tn6eqef652npmohsduuqj5opbilp.apps.googleusercontent.com',
-	clientSecret: 'QPx4HqZPnWW_lm1Eq_fqktnO',
+
+	clientID: '55210986752-55s41dbk9ierd1p1r0tnvlev3jkp82dr.apps.googleusercontent.com',
+	clientSecret: 'NRTvnc33gNp7VqH11gEElapo',
 	callbackURL: 'http://localhost:3000/auth/google/callback'
 	},
 	function(req, accessToken, refreshToken, profile, done){
-		done(null, profile);
+		return done(null, profile);
 	}
 ));
 

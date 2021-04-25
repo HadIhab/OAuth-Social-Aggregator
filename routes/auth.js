@@ -10,9 +10,14 @@ router.route('/google/callback')
 
 router.route('/google')
 	.get(passport.authenticate('google',{
-		scope: ['https://www.googleapi.com/auth/userinfo.profile'
-				'https://www.googleapi.com/auth/userinfo.email'
+		scope: ['profile'
 		]
 	}));
-
+	
+router.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/');
+  })
 module.exports = router;		
